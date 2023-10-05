@@ -1,0 +1,11 @@
+{
+	"required": true,
+	"package": "net.pmkjun.planetskilltimer.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [
+      "chatMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
