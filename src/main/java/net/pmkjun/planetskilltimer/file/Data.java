@@ -4,5 +4,5 @@ import java.io.Serializable;
 
 public class Data implements Serializable {
     public long[] lastSkillTime = new long[4];
-
+    public boolean toggleSkilltimer = true;
 }

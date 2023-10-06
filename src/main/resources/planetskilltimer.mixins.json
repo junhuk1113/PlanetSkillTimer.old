@@ -3,8 +3,9 @@
 	"package": "net.pmkjun.planetskilltimer.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-      "chatMixin",
-		"bossbarMixin"
+		"bossbarMixin",
+		"chatMixin",
+		"GuiMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

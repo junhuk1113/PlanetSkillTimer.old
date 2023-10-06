@@ -2,6 +2,7 @@ package net.pmkjun.planetskilltimer.mixin;
 
 import net.minecraft.client.gui.hud.ChatHud;
 import net.minecraft.text.Text;
+import net.pmkjun.planetskilltimer.PlanetSkillTimerClient;
 import net.pmkjun.planetskilltimer.file.Skill;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,10 +20,10 @@ public abstract class chatMixin {
 			{
 				if(message.getString().contains(Skill.list[i])){
 					System.out.println(Skill.list[i]+" 발동감지!");
+					PlanetSkillTimerClient.getInstance().updateLastSkilltime(i);
 				}
 			}
 		}
 		System.out.println(message.getString());
-		System.out.println(message.hashCode());
 	}
 }
