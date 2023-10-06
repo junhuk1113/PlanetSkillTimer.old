@@ -27,9 +27,12 @@ public class bossbarMixin {
             for (int i = 0; i < Stat.list.length ; i++)
             {
                 if(bossbarText.contains(Stat.list[i])){
-                    temp=bossbarText.substring(3+Stat.list[i].length(),bossbarText.indexOf("("));
-                    System.out.println("["+temp+"]");
-                    System.out.println(Stat.list[i]+"의 레벨이 "+ "뭔가" + "(으)로 상승했습니다!");
+                    temp=bossbarText.substring(3+Stat.list[i].length(),bossbarText.indexOf("(")-1);
+                    if(Integer.parseInt(temp) > Stat.level[i])
+                    {
+                        Stat.level[i] = Integer.parseInt(temp);
+                        System.out.println(Stat.list[i]+"의 레벨이 "+ temp + "(으)로 상승했습니다!");
+                    }
                 }
             }
         }
