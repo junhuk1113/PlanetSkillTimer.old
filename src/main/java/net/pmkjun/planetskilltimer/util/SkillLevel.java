@@ -9,6 +9,7 @@ public class SkillLevel {
             //ms
     };
     public static int getActivateTime(int skilltype, int skilllevel){
+        if(skilllevel / 7 == 0) return 0;
         return skillTimetable[skilltype][0] + (skilllevel / 7 - 1) * skillTimetable[skilltype][1];
     }
 }
