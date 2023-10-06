@@ -7,6 +7,7 @@ import net.minecraft.entity.boss.BossBar;
 import net.minecraft.text.Text;
 import net.pmkjun.planetskilltimer.file.Skill;
 import net.pmkjun.planetskilltimer.file.Stat;
+import net.pmkjun.planetskilltimer.util.SkillLevel;
 import org.spongepowered.asm.mixin.Mixin;
 import net.minecraft.client.gui.hud.ClientBossBar;
 import org.spongepowered.asm.mixin.injection.At;
@@ -32,6 +33,8 @@ public class bossbarMixin {
                     {
                         Stat.level[i] = Integer.parseInt(temp);
                         System.out.println(Stat.list[i]+"의 레벨이 "+ temp + "(으)로 상승했습니다!");
+                        System.out.println(Skill.list[i]+"의 지속시간은 "+SkillLevel.getActivateTime(i,Stat.level[i])/1000+"입니다.");
+
                     }
                 }
             }
