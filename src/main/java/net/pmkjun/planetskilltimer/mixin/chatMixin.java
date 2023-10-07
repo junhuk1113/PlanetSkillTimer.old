@@ -15,7 +15,7 @@ public abstract class chatMixin {
 	@Inject(at = @At("RETURN"), method = "addMessage(Lnet/minecraft/text/Text;)V")
 	private void addMessageMixin(Text message, CallbackInfo ci) {
 		// This code is injected into the start of MinecraftServer.loadWorld()V
-		if(message.getString().contains("이 발동되었습니다!") && !message.getString().contains("|")){
+		if(message.getString().contains(" 발동되었습니다!") && !message.getString().contains("|")){
 			for (int i = 0; i < Skill.list.length ; i++)
 			{
 				if(message.getString().contains(Skill.list[i])){

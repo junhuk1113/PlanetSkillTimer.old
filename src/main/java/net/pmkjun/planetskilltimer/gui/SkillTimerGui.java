@@ -59,11 +59,21 @@ public class SkillTimerGui {
         if(cooldown_ms < 0){
             //남은 지속시간
             System.out.println("남은 스킬 지속시간 : "+ ((activatetime-ms)/(double)1000) +"초");
+            poseStack.push();
+            poseStack.translate((2+18*skilltype+8), (mc.getWindow().getScaledHeight()-18 + 4), 0.0F);
+            poseStack.scale(0.9090909F, 0.9090909F, 0.9090909F);
+            context.drawCenteredTextWithShadow(this.mc.textRenderer, (Text)Text.literal(String.format("%.1f",((activatetime-ms)/(double)1000))), 0, 0, 16777215);
+            poseStack.pop();
+
 
         }
         else if(cooldown_ms < 200000){
             System.out.println("남은 스킬 쿨타임 : "+(200-cooldown_ms/(double)1000)+"초");
-
+            poseStack.push();
+            poseStack.translate((2+18*skilltype+8), (mc.getWindow().getScaledHeight()-18 + 4), 0.0F);
+            poseStack.scale(0.9090909F, 0.9090909F, 0.9090909F);
+            context.drawCenteredTextWithShadow(this.mc.textRenderer, (Text)Text.literal(String.format("%.1f",(200-cooldown_ms/(double)1000))), 0, 0, 16777215);
+            poseStack.pop();
         }
 
     }
