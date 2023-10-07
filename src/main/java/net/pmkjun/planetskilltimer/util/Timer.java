@@ -7,8 +7,8 @@ public class Timer {
         this.currentTime = System.currentTimeMillis();
     }
 
-    public float getDifference(long time) {
-        return (float)(this.currentTime - time) / 1000.0F;
+    public long getDifference(long time) {
+        return this.currentTime - time;
     }
 
     public long getCurrentTime() {
