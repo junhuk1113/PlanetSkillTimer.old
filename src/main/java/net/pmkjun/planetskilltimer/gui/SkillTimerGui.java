@@ -12,6 +12,7 @@ import net.minecraft.util.Identifier;
 import net.pmkjun.planetskilltimer.PlanetSkillTimerClient;
 import net.pmkjun.planetskilltimer.file.Stat;
 import net.pmkjun.planetskilltimer.util.SkillLevel;
+import net.pmkjun.planetskilltimer.util.Timeformat;
 import net.pmkjun.planetskilltimer.util.Timer;
 
 public class SkillTimerGui {
@@ -41,11 +42,13 @@ public class SkillTimerGui {
 
     private void render(DrawContext context,Identifier texture,int skilltype, long ms) {
         MatrixStack poseStack = context.getMatrices();
-        double cooldown_ms;
-        int activatetime;
+        long remaining_activatetime, remaining_cooldowntime;
+        int activatetime, cooldowntime;
 
         activatetime = SkillLevel.getActivateTime(skilltype,Stat.level[skilltype]);
-        cooldown_ms = ms - activatetime;
+        cooldowntime = SkillLevel.getCooldownTime(skilltype);
+        remaining_activatetime = activatetime - ms;
+        remaining_cooldowntime = cooldowntime - (ms - activatetime);
 
         poseStack.push();
         poseStack.translate(2+18*skilltype,mc.getWindow().getScaledHeight()-18,0.0D);
@@ -56,23 +59,20 @@ public class SkillTimerGui {
         poseStack.scale(16.0F, 16.0F, 16.0F);
         poseStack.pop();
 
-        if(cooldown_ms < 0){
+        poseStack.push();
+        if(remaining_activatetime > 0){
             //남은 지속시간
-            System.out.println("남은 스킬 지속시간 : "+ ((activatetime-ms)/(double)1000) +"초");
-            poseStack.push();
+            System.out.println("남은 스킬 지속시간 : "+ (remaining_activatetime/(double)1000) +"초");
             poseStack.translate((2+18*skilltype+8), (mc.getWindow().getScaledHeight()-18 + 4), 0.0F);
             poseStack.scale(0.9090909F, 0.9090909F, 0.9090909F);
-            context.drawCenteredTextWithShadow(this.mc.textRenderer, (Text)Text.literal(String.format("%.1f",((activatetime-ms)/(double)1000))), 0, 0, 16777215);
+            context.drawCenteredTextWithShadow(this.mc.textRenderer, (Text)Text.literal(Timeformat.getString(remaining_activatetime)), 0, 0, 16777215);
             poseStack.pop();
-
-
         }
-        else if(cooldown_ms < 200000){
-            System.out.println("남은 스킬 쿨타임 : "+(200-cooldown_ms/(double)1000)+"초");
-            poseStack.push();
+        else if(remaining_cooldowntime > 0){
+            System.out.println("남은 스킬 쿨타임 : "+(remaining_cooldowntime/(double)1000)+"초");
             poseStack.translate((2+18*skilltype+8), (mc.getWindow().getScaledHeight()-18 + 4), 0.0F);
             poseStack.scale(0.9090909F, 0.9090909F, 0.9090909F);
-            context.drawCenteredTextWithShadow(this.mc.textRenderer, (Text)Text.literal(String.format("%.1f",(200-cooldown_ms/(double)1000))), 0, 0, 16777215);
+            context.drawCenteredTextWithShadow(this.mc.textRenderer, (Text)Text.literal(Timeformat.getString(remaining_cooldowntime)), 0, 0, 16777215);
             poseStack.pop();
         }
 
