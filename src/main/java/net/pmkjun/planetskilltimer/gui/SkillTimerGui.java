@@ -14,7 +14,7 @@ import net.pmkjun.planetskilltimer.file.Stat;
 import net.pmkjun.planetskilltimer.util.SkillLevel;
 import net.pmkjun.planetskilltimer.util.Timer;
 
-public class SkillTimerGui extends DrawContext {
+public class SkillTimerGui {
     private MinecraftClient mc;
     private PlanetSkillTimerClient client;
     private TextRenderer font;
@@ -27,7 +27,6 @@ public class SkillTimerGui extends DrawContext {
     };
 
     public SkillTimerGui(){
-        super(MinecraftClient.getInstance(), VertexConsumerProvider.immediate(new BufferBuilder(10)));
         this.mc = MinecraftClient.getInstance();
         this.client = PlanetSkillTimerClient.getInstance();
     }
@@ -41,13 +40,22 @@ public class SkillTimerGui extends DrawContext {
     }
 
     private void render(DrawContext context,Identifier texture,int skilltype, long ms) {
-        MatrixStack poseStack = getMatrices();
-        poseStack.push();
+        MatrixStack poseStack = context.getMatrices();
         double cooldown_ms;
         int activatetime;
 
         activatetime = SkillLevel.getActivateTime(skilltype,Stat.level[skilltype]);
         cooldown_ms = ms - activatetime;
+
+        poseStack.push();
+        poseStack.translate(2+18*skilltype,mc.getWindow().getScaledHeight()-18,0.0D);
+        poseStack.scale(0.0625F, 0.0625F, 0.0625F);
+
+        RenderSystem.setShaderTexture(0,texture);
+        context.drawTexture(texture, 0, 0, 0, 0, 256, 256);
+        poseStack.scale(16.0F, 16.0F, 16.0F);
+        poseStack.pop();
+
         if(cooldown_ms < 0){
             //남은 지속시간
             System.out.println("남은 스킬 지속시간 : "+ ((activatetime-ms)/(double)1000) +"초");
@@ -57,13 +65,7 @@ public class SkillTimerGui extends DrawContext {
             System.out.println("남은 스킬 쿨타임 : "+(200-cooldown_ms/(double)1000)+"초");
 
         }
-        poseStack.translate(skilltype*18,mc.getWindow().getScaledHeight()+100,0.0D);
-        poseStack.scale(0.0625F, 0.0625F, 0.0625F);
 
-        RenderSystem.setShaderTexture(0,texture);
-        drawTexture(texture, 0, 0, 0, 0, 256, 256);
-        poseStack.scale(16.0F, 16.0F, 16.0F);
-        poseStack.pop();
     }
 
 }
