@@ -62,17 +62,20 @@ public class SkillTimerGui {
         poseStack.scale(16.0F, 16.0F, 16.0F);
         poseStack.pop();
 
-        poseStack.push();
-        poseStack.translate((5+22*skilltype+8), (mc.getWindow().getScaledHeight()-18 + 4), 0.0F);
-        poseStack.scale(0.9090909F, 0.9090909F, 0.9090909F);
         if(remaining_activatetime > 0){
             //남은 지속시간
             System.out.println("남은 스킬 지속시간 : "+ (remaining_activatetime/(double)1000) +"초");
+            poseStack.push();
+            poseStack.translate((5+22*skilltype+8), (mc.getWindow().getScaledHeight()-18 + 4), 0.0F);
+            poseStack.scale(0.9090909F, 0.9090909F, 0.9090909F);
             context.drawCenteredTextWithShadow(this.mc.textRenderer, (Text)Text.literal(Timeformat.getString(remaining_activatetime)), 0, 0, 16777215);
             poseStack.pop();
         }
         else if(remaining_cooldowntime > 0){
             System.out.println("남은 스킬 쿨타임 : "+(remaining_cooldowntime/(double)1000)+"초");
+            poseStack.push();
+            poseStack.translate((5+22*skilltype+8), (mc.getWindow().getScaledHeight()-18 + 4), 0.0F);
+            poseStack.scale(0.9090909F, 0.9090909F, 0.9090909F);
             context.drawCenteredTextWithShadow(this.mc.textRenderer, (Text)Text.literal(Timeformat.getString(remaining_cooldowntime)), 0, 0, 16777215);
             poseStack.pop();
         }
