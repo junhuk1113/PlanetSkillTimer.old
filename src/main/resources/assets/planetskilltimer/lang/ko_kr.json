@@ -1,5 +1,6 @@
 {
   "planetskilltimer.config.enable" : "스킬 타이머 : 켜짐",
   "planetskilltimer.config.disable" : "스킬 타이머 : 꺼짐",
-  "planetskilltimer.config.exit" : "완료"
+  "planetskilltimer.config.exit" : "완료",
+  "planetskilltimer.key.open_settings" : "PlanetSkillTimer 설정"
 }

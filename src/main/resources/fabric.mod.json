@@ -18,7 +18,9 @@
 		"main": [
 			"net.pmkjun.planetskilltimer.PlanetSkillTimer"
 		],
-		"modmenu": ["net.pmkjun.planetskilltimer.config.ModMenu"]
+		"modmenu": [
+			"net.pmkjun.planetskilltimer.config.SkillTimerModMenu"
+		]
 	},
 	"mixins": [
 		"planetskilltimer.mixins.json"
