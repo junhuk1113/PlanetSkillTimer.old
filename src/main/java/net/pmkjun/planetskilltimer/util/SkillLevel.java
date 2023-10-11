@@ -2,7 +2,7 @@ package net.pmkjun.planetskilltimer.util;
 
 public class SkillLevel {
     private static final int[][] skillTimetable = {
-            {15000, 3800, 135000, 7500}, //농사 : 재보충
+            {15000, 3800, 150000, 12500}, //농사 : 재보충
             {15000, 1500, 200000, 2000}, //벌목 : 벌목기
             {5000, 5000, 200000, 5000}, //채광 : 빠른채광
             {5000, 1000, 300000, 5000} //발굴 : 지형수정
