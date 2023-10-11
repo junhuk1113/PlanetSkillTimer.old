@@ -32,12 +32,13 @@ public class ConfigScreen extends Screen{
         }
         toggleSkillTimerButton = ButtonWidget.builder(Text.translatable(toggleskilltimer),button -> {
             toggleSkilltimer();
-        }).dimensions(mc.getWindow().getScaledWidth()/2,mc.getWindow().getScaledHeight()/2, 150,20).build();
+        }).dimensions(mc.getWindow().getScaledWidth() / 2 - 75,mc.getWindow().getScaledHeight()/2, 150,20).build();
         this.addDrawableChild(toggleSkillTimerButton);
 
         ButtonWidget exitButton = ButtonWidget.builder(Text.translatable("planetskilltimer.config.exit"), button -> {
             mc.setScreen(parentScreen);
-        }).dimensions(mc.getWindow().getScaledWidth() / 2, mc.getWindow().getScaledHeight() - 30, 70, 20).build();
+        }).dimensions(mc.getWindow().getScaledWidth() / 2 - 35, mc.getWindow().getScaledHeight() - 25, 70, 20).build();
+        this.addDrawableChild(exitButton);
     }
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         this.renderBackground(context);

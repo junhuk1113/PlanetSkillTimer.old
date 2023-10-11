@@ -3,13 +3,18 @@
 	"id": "planetskilltimer",
 	"version": "${version}",
 	"name": "PlanetSkillTimer",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "마인플레닛 서버 스탯 시스템의 스킬 쿨타임을 카운트해주는 모드입니다.",
 	"authors": [
-		"Me!"
+		"PMKJun"
 	],
+	"contributors":[
+		"cada3141","_uLynxl", "LuckyBox_", "KMS08"
+
+	]
+	,
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://github.com/junhuk1113/PlanetSkillTimer",
+		"sources": "https://github.com/junhuk1113/PlanetSkillTimer"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/planetskilltimer/icon.png",
@@ -27,7 +32,7 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.14.22",
-		"minecraft": "~1.20",
+		"minecraft": "1.20.x",
 		"java": ">=17",
 		"fabric-api": "*"
 	},
