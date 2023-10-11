@@ -3,6 +3,7 @@ package net.pmkjun.planetskilltimer;
 import net.fabricmc.api.ModInitializer;
 
 import net.minecraft.client.MinecraftClient;
+import net.pmkjun.planetskilltimer.input.KeyMappings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,5 +18,7 @@ public class PlanetSkillTimer implements ModInitializer {
 	public void onInitialize() {
 		this.client = new PlanetSkillTimerClient();
 		this.client.init();
+		KeyMappings keyMappings = new KeyMappings();
+		keyMappings.register();
 	}
 }

@@ -1,0 +1,5 @@
+{
+  "planetskilltimer.config.enable" : "SkillTimer : ON",
+  "planetskilltimer.config.disable" : "SkillTimer : OFF",
+  "planetskilltimer.config.exit" : "Complete"
+}

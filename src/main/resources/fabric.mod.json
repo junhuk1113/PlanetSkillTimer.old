@@ -17,7 +17,8 @@
 	"entrypoints": {
 		"main": [
 			"net.pmkjun.planetskilltimer.PlanetSkillTimer"
-		]
+		],
+		"modmenu": ["net.pmkjun.planetskilltimer.config.ModMenu"]
 	},
 	"mixins": [
 		"planetskilltimer.mixins.json"

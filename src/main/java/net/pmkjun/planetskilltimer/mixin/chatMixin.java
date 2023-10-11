@@ -19,7 +19,7 @@ public abstract class chatMixin {
 			for (int i = 0; i < Skill.list.length ; i++)
 			{
 				if(message.getString().contains(Skill.list[i])){
-					System.out.println(Skill.list[i]+" 발동감지!");
+					//System.out.println(Skill.list[i]+" 발동감지!");
 					PlanetSkillTimerClient.getInstance().updateLastSkilltime(i);
 				}
 			}
