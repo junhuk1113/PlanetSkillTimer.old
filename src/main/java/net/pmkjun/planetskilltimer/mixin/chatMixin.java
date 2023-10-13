@@ -24,6 +24,6 @@ public abstract class chatMixin {
 				}
 			}
 		}
-		System.out.println(message.getString());
+		//System.out.println(message.getString());
 	}
 }
