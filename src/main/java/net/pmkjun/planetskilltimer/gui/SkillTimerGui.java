@@ -34,14 +34,18 @@ public class SkillTimerGui {
     }
 
     public void renderTick(DrawContext context, Timer timer){
+        int i = 0;
         if(!this.client.data.toggleSkilltimer) return; //스킬타이머를 껏을때 실행x
 
         for(int skilltype = 0; skilltype < Stat.list.length ; skilltype++){
-            render(context, SKILL_ICONS[skilltype], skilltype, timer.getDifference(client.data.lastSkillTime[skilltype]));
+            if(client.data.toggleSkills[skilltype]) {
+                render(context, SKILL_ICONS[skilltype], i, skilltype, timer.getDifference(client.data.lastSkillTime[skilltype]));
+                i++;
+            }
         }
     }
 
-    private void render(DrawContext context,Identifier texture,int skilltype, long ms) {
+    private void render(DrawContext context,Identifier texture,int i,int skilltype, long ms) {
         MatrixStack poseStack = context.getMatrices();
         long remaining_activatetime, remaining_cooldowntime;
         int activatetime, cooldowntime;
@@ -51,10 +55,10 @@ public class SkillTimerGui {
         remaining_activatetime = activatetime - ms;
         remaining_cooldowntime = cooldowntime - (ms - activatetime);
 
-        context.drawTexture(WIDGETS, 2+22*skilltype,mc.getWindow().getScaledHeight()-18-3, 24, 23, 22, 22);
+        context.drawTexture(WIDGETS, 2+22*i,mc.getWindow().getScaledHeight()-18-3, 24, 23, 22, 22);
 
         poseStack.push();
-        poseStack.translate(5+22*skilltype,mc.getWindow().getScaledHeight()-18,0.0D);
+        poseStack.translate(5+22*i,mc.getWindow().getScaledHeight()-18,0.0D);
         poseStack.scale(0.0625F, 0.0625F, 0.0625F);
 
         RenderSystem.setShaderTexture(0,texture);
@@ -66,7 +70,7 @@ public class SkillTimerGui {
             //남은 지속시간
             //System.out.println("남은 스킬 지속시간 : "+ (remaining_activatetime/(double)1000) +"초");
             poseStack.push();
-            poseStack.translate((5+22*skilltype+8), (mc.getWindow().getScaledHeight()-18 + 4), 0.0F);
+            poseStack.translate((5+22*i+8), (mc.getWindow().getScaledHeight()-18 + 4), 0.0F);
             poseStack.scale(0.9090909F, 0.9090909F, 0.9090909F);
             context.drawCenteredTextWithShadow(this.mc.textRenderer, (Text)Text.literal(Timeformat.getString(remaining_activatetime)), 0, 0, 16777215);
             poseStack.pop();
@@ -74,12 +78,19 @@ public class SkillTimerGui {
         else if(remaining_cooldowntime > 0){
             //System.out.println("남은 스킬 쿨타임 : "+(remaining_cooldowntime/(double)1000)+"초");
             poseStack.push();
-            poseStack.translate((5+22*skilltype+8), (mc.getWindow().getScaledHeight()-18 + 4), 0.0F);
+            poseStack.translate((5+22*i+8), (mc.getWindow().getScaledHeight()-18 + 4), 0.0F);
             poseStack.scale(0.9090909F, 0.9090909F, 0.9090909F);
             context.drawCenteredTextWithShadow(this.mc.textRenderer, (Text)Text.literal(Timeformat.getString(remaining_cooldowntime)), 0, 0, 16777215);
             poseStack.pop();
         }
 
+    }
+    private int getEnabledSkillCount(){
+        int count = 0;
+        for(boolean toggleskill : this.client.data.toggleSkills){
+            if(toggleskill) count++;
+        }
+        return count;
     }
 
 }
