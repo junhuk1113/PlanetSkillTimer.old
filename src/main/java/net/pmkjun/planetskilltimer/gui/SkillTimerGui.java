@@ -55,10 +55,10 @@ public class SkillTimerGui {
         remaining_activatetime = activatetime - ms;
         remaining_cooldowntime = cooldowntime - (ms - activatetime);
 
-        context.drawTexture(WIDGETS, 2+22*i,mc.getWindow().getScaledHeight()-18-3, 24, 23, 22, 22);
+        context.drawTexture(WIDGETS, getXpos()+22*i,getYpos(), 24, 23, 22, 22);
 
         poseStack.push();
-        poseStack.translate(5+22*i,mc.getWindow().getScaledHeight()-18,0.0D);
+        poseStack.translate(3+getXpos()+22*i,getYpos()+4-1,0.0D);
         poseStack.scale(0.0625F, 0.0625F, 0.0625F);
 
         RenderSystem.setShaderTexture(0,texture);
@@ -70,7 +70,7 @@ public class SkillTimerGui {
             //남은 지속시간
             //System.out.println("남은 스킬 지속시간 : "+ (remaining_activatetime/(double)1000) +"초");
             poseStack.push();
-            poseStack.translate((5+22*i+8), (mc.getWindow().getScaledHeight()-18 + 4), 0.0F);
+            poseStack.translate((3+getXpos()+22*i+8), (getYpos() + 8-1), 0.0F);
             poseStack.scale(0.9090909F, 0.9090909F, 0.9090909F);
             context.drawCenteredTextWithShadow(this.mc.textRenderer, (Text)Text.literal(Timeformat.getString(remaining_activatetime)), 0, 0, 16777215);
             poseStack.pop();
@@ -78,7 +78,7 @@ public class SkillTimerGui {
         else if(remaining_cooldowntime > 0){
             //System.out.println("남은 스킬 쿨타임 : "+(remaining_cooldowntime/(double)1000)+"초");
             poseStack.push();
-            poseStack.translate((5+22*i+8), (mc.getWindow().getScaledHeight()-18 + 4), 0.0F);
+            poseStack.translate((3+getXpos()+22*i+8), (getYpos() + 8-1), 0.0F);
             poseStack.scale(0.9090909F, 0.9090909F, 0.9090909F);
             context.drawCenteredTextWithShadow(this.mc.textRenderer, (Text)Text.literal(Timeformat.getString(remaining_cooldowntime)), 0, 0, 16777215);
             poseStack.pop();
@@ -91,6 +91,12 @@ public class SkillTimerGui {
             if(toggleskill) count++;
         }
         return count;
+    }
+    private int getXpos(){
+        return (this.mc.getWindow().getScaledWidth()-(22*getEnabledSkillCount())) * this.client.data.SkillTimerXpos / 1000;
+    }
+    private int getYpos(){
+        return (this.mc.getWindow().getScaledHeight()-(22)) * this.client.data.SkillTimerYpos / 1000;
     }
 
 }

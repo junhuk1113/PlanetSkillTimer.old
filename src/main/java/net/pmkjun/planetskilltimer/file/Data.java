@@ -7,5 +7,5 @@ public class Data implements Serializable {
     public boolean toggleSkilltimer = true;
     public boolean[] toggleSkills = { true, true, true, true };;
     public int SkillTimerXpos = 0;
-    public int SkillTimerYpos = 0;
+    public int SkillTimerYpos = 1000;
 }
