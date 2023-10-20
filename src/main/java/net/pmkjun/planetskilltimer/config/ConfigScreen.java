@@ -42,7 +42,7 @@ public class ConfigScreen extends Screen{
         }).dimensions(mc.getWindow().getScaledWidth() / 2 - 35, mc.getWindow().getScaledHeight() - 25, 70, 20).build();
         this.addDrawableChild(exitButton);
 
-        slider = new Slider(mc.getWindow().getScaledWidth() / 2 - 35, mc.getWindow().getScaledHeight() - 25+(20+2),150,20,Text.literal("슬라이더 : "),0);
+        slider = new Slider(mc.getWindow().getScaledWidth() / 2 - 35, mc.getWindow().getScaledHeight()/2 + (20+2),150,20,Text.literal("슬라이더 : "),0);
         this.addDrawableChild(slider);
     }
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
