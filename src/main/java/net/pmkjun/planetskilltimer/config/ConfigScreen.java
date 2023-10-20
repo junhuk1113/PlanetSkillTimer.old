@@ -16,12 +16,16 @@ public class ConfigScreen extends Screen{
 
     private ButtonWidget toggleSkillTimerButton;
     private Slider slider;
+    private int width, height;
 
     public ConfigScreen(Screen parentScreen) {
         super(Text.literal("스킬 타이머 설정"));
         this.parentScreen = parentScreen;
         this.mc = MinecraftClient.getInstance();
         this.client = PlanetSkillTimerClient.getInstance();
+
+        this.width = 150;
+        this.height = 66;
     }
     @Override
     protected void init() {
@@ -34,7 +38,7 @@ public class ConfigScreen extends Screen{
         }
         toggleSkillTimerButton = ButtonWidget.builder(Text.translatable(toggleskilltimer),button -> {
             toggleSkilltimer();
-        }).dimensions(mc.getWindow().getScaledWidth() / 2 - 75,mc.getWindow().getScaledHeight()/2, 150,20).build();
+        }).dimensions(getRegularX(),getRegularY(), 150,20).build();
         this.addDrawableChild(toggleSkillTimerButton);
 
         ButtonWidget exitButton = ButtonWidget.builder(Text.translatable("planetskilltimer.config.exit"), button -> {
@@ -42,7 +46,13 @@ public class ConfigScreen extends Screen{
         }).dimensions(mc.getWindow().getScaledWidth() / 2 - 35, mc.getWindow().getScaledHeight() - 25, 70, 20).build();
         this.addDrawableChild(exitButton);
 
-        slider = new Slider(mc.getWindow().getScaledWidth() / 2 - 75, mc.getWindow().getScaledHeight()/2 + (20+2),150,20,Text.literal("슬라이더 : "),0,100,0);
+        slider = new Slider(getRegularX(), getRegularY()+20+2,150,20,Text.literal("X : "),0,1000,this.client.data.SkillTimerXpos){
+            @Override
+            protected void applyValue() {
+                client.data.SkillTimerXpos = this.getValueInt();
+                client.configManage.save();
+            }
+        };
         this.addDrawableChild(slider);
     }
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
@@ -62,5 +72,13 @@ public class ConfigScreen extends Screen{
             client.data.toggleSkilltimer = true ;
             client.configManage.save();
         }
+    }
+
+    int getRegularX() {
+        return  mc.getWindow().getScaledWidth() / 2 - width / 2;
+    }
+
+    int getRegularY() {
+        return mc.getWindow().getScaledHeight() / 2 - height / 2;
     }
 }
