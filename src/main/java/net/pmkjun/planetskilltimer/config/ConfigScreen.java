@@ -6,6 +6,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.Text;
 import net.pmkjun.planetskilltimer.PlanetSkillTimerClient;
+import net.pmkjun.planetskilltimer.gui.widget.Slider;
 
 public class ConfigScreen extends Screen{
 
@@ -14,6 +15,7 @@ public class ConfigScreen extends Screen{
     private final Screen parentScreen;
 
     private ButtonWidget toggleSkillTimerButton;
+    private Slider slider;
 
     public ConfigScreen(Screen parentScreen) {
         super(Text.literal("스킬 타이머 설정"));
@@ -39,9 +41,13 @@ public class ConfigScreen extends Screen{
             mc.setScreen(parentScreen);
         }).dimensions(mc.getWindow().getScaledWidth() / 2 - 35, mc.getWindow().getScaledHeight() - 25, 70, 20).build();
         this.addDrawableChild(exitButton);
+
+        slider = new Slider(mc.getWindow().getScaledWidth() / 2 - 35, mc.getWindow().getScaledHeight() - 25+(20+2),150,20,Text.literal("슬라이더 : "),0);
+        this.addDrawableChild(slider);
     }
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         this.renderBackground(context);
+        slider.render(context,mouseX,mouseY,delta);
         super.render(context, mouseX, mouseY, delta);
     }
 
