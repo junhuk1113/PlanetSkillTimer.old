@@ -17,6 +17,7 @@ public class ConfigScreen extends Screen{
     private final Screen parentScreen;
 
     private ButtonWidget toggleSkillTimerButton;
+    private ButtonWidget toggleAlertSoundButton;
     private ButtonWidget[] toggleSkillsButton = new ButtonWidget[4];
     String[] SkillList = {"farming","felling","mining","digging"};
     private Slider XPosSlider;
@@ -48,6 +49,20 @@ public class ConfigScreen extends Screen{
         }).dimensions(getRegularX(),getRegularY(), 150,20).build();
         this.addDrawableChild(toggleSkillTimerButton);
 
+        Text text2;
+        if(client.data.toggleAlertSound){
+            text2 = Text.translatable("planetskilltimer.config.sound").append(
+                    Text.translatable("planetskilltimer.config.enable").getWithStyle(Style.EMPTY.withFormatting(Formatting.GREEN).withBold(true)).get(0));
+        }
+        else{
+            text2 = Text.translatable("planetskilltimer.config.sound").append(
+                    Text.translatable("planetskilltimer.config.disable").getWithStyle(Style.EMPTY.withFormatting(Formatting.RED).withBold(true)).get(0));
+        }
+        toggleAlertSoundButton = ButtonWidget.builder(text2,button -> {
+            toggleAlertSound();
+        }).dimensions(getRegularX(),getRegularY()+(20+2)*1, 150,20).build();
+        this.addDrawableChild(toggleAlertSoundButton);
+
         for(int i = 0; i < 4 ; i++){
             if(client.data.toggleSkills[i]){
                 text = Text.translatable("planetskilltimer.config."+SkillList[i]).append(
@@ -61,22 +76,22 @@ public class ConfigScreen extends Screen{
                 case 0:
                     toggleSkillsButton[i] = ButtonWidget.builder(text,button -> {
                         toggleSkills(0);
-                    }).dimensions(getRegularX(),getRegularY()+(20+2)*(i+1), 150,20).build();
+                    }).dimensions(getRegularX(),getRegularY()+(20+2)*(i+2), 150,20).build();
                     break;
                 case 1:
                     toggleSkillsButton[i] = ButtonWidget.builder(text,button -> {
                         toggleSkills(1);
-                    }).dimensions(getRegularX(),getRegularY()+(20+2)*(i+1), 150,20).build();
+                    }).dimensions(getRegularX(),getRegularY()+(20+2)*(i+2), 150,20).build();
                     break;
                 case 2:
                     toggleSkillsButton[i] = ButtonWidget.builder(text,button -> {
                         toggleSkills(2);
-                    }).dimensions(getRegularX(),getRegularY()+(20+2)*(i+1), 150,20).build();
+                    }).dimensions(getRegularX(),getRegularY()+(20+2)*(i+2), 150,20).build();
                     break;
                 case 3:
                     toggleSkillsButton[i] = ButtonWidget.builder(text,button -> {
                         toggleSkills(3);
-                    }).dimensions(getRegularX(),getRegularY()+(20+2)*(i+1), 150,20).build();
+                    }).dimensions(getRegularX(),getRegularY()+(20+2)*(i+2), 150,20).build();
                     break;
 
             }
@@ -89,7 +104,7 @@ public class ConfigScreen extends Screen{
         }).dimensions(mc.getWindow().getScaledWidth() / 2 - 35, mc.getWindow().getScaledHeight() - 25, 70, 20).build();
         this.addDrawableChild(exitButton);
 
-        XPosSlider = new Slider(getRegularX(), getRegularY()+(20+2)*5,150,20,Text.literal("X : "),0,1000,this.client.data.SkillTimerXpos){
+        XPosSlider = new Slider(getRegularX(), getRegularY()+(20+2)*6,150,20,Text.literal("X : "),0,1000,this.client.data.SkillTimerXpos){
             @Override
             protected void applyValue() {
                 client.data.SkillTimerXpos = this.getValueInt();
@@ -97,7 +112,7 @@ public class ConfigScreen extends Screen{
             }
         };
         this.addDrawableChild(XPosSlider);
-        YPosSlider = new Slider(getRegularX(), getRegularY()+(20+2)*6,150,20,Text.literal("Y : "),0,1000,this.client.data.SkillTimerYpos){
+        YPosSlider = new Slider(getRegularX(), getRegularY()+(20+2)*7,150,20,Text.literal("Y : "),0,1000,this.client.data.SkillTimerYpos){
             @Override
             protected void applyValue() {
                 client.data.SkillTimerYpos = this.getValueInt();
@@ -124,6 +139,21 @@ public class ConfigScreen extends Screen{
             toggleSkillTimerButton.setMessage(Text.translatable("planetskilltimer.config.skilltimer").append(
                     Text.translatable("planetskilltimer.config.enable").getWithStyle(Style.EMPTY.withFormatting(Formatting.GREEN).withBold(true)).get(0)));
             client.data.toggleSkilltimer = true ;
+            client.configManage.save();
+        }
+    }
+
+    private void toggleAlertSound(){
+        if(client.data.toggleAlertSound){
+            toggleAlertSoundButton.setMessage(Text.translatable("planetskilltimer.config.sound").append(
+                    Text.translatable("planetskilltimer.config.disable").getWithStyle(Style.EMPTY.withFormatting(Formatting.RED).withBold(true)).get(0)));
+            client.data.toggleAlertSound = false;
+            client.configManage.save();
+        }
+        else{
+            toggleAlertSoundButton.setMessage(Text.translatable("planetskilltimer.config.sound").append(
+                    Text.translatable("planetskilltimer.config.enable").getWithStyle(Style.EMPTY.withFormatting(Formatting.GREEN).withBold(true)).get(0)));
+            client.data.toggleAlertSound = true ;
             client.configManage.save();
         }
     }

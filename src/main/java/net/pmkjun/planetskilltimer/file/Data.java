@@ -8,4 +8,6 @@ public class Data implements Serializable {
     public boolean[] toggleSkills = { true, true, true, true };;
     public int SkillTimerXpos = 0;
     public int SkillTimerYpos = 1000;
+
+    public boolean toggleAlertSound = true;
 }

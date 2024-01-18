@@ -5,10 +5,10 @@
 	"name": "PlanetSkillTimer",
 	"description": "마인플레닛 서버 스탯 시스템의 스킬 쿨타임을 카운트해주는 모드입니다.",
 	"authors": [
-		"PMKJun"
+		"PMKJun", "cada3141"
 	],
 	"contributors":[
-		"cada3141","_uLynxl", "LuckyBox_", "KMS08", "_Danbi"
+		"_uLynxl", "LuckyBox_", "KMS08", "_Danbi", "_IIN", "kelly__"
 
 	]
 	,

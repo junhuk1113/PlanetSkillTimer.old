@@ -32,9 +32,22 @@ public class bossbarMixin {
                     if(Integer.parseInt(temp) > Stat.level[i])
                     {
                         Stat.level[i] = Integer.parseInt(temp);
-                        //System.out.println(Stat.list[i]+"의 레벨이 "+ temp + "(으)로 상승했습니다!");
-                        //System.out.println(Skill.list[i]+"의 지속시간은 "+SkillLevel.getActivateTime(i,Stat.level[i])/(double)1000+"초 입니다.");
-                        //System.out.println(Skill.list[i]+"의 쿨타임은 "+SkillLevel.getCooldownTime(i,Stat.level[i])/(double)1000+"초 입니다.");
+                        System.out.println(Stat.list[i]+"의 레벨이 "+ temp + "(으)로 상승했습니다!");
+                        System.out.println(Skill.list[i]+"의 지속시간은 "+SkillLevel.getActivateTime(i,Stat.level[i])/(double)1000+"초 입니다.");
+                        System.out.println(Skill.list[i]+"의 쿨타임은 "+SkillLevel.getCooldownTime(i,Stat.level[i])/(double)1000+"초 입니다.");
+                    }
+                }
+            }
+        }
+        else if(bossbarText.contains("최대)")) {
+            for (int i = 0; i < Stat.list.length; i++) {
+                if (bossbarText.contains(Stat.list[i])) {
+                    temp = bossbarText.substring(3 + Stat.list[i].length(), bossbarText.indexOf("(") - 1);
+                    if (Integer.parseInt(temp) > Stat.level[i]) {
+                        Stat.level[i] = Integer.parseInt(temp);
+                        System.out.println(Stat.list[i] + "의 레벨이 " + temp + "(으)로 상승했습니다!");
+                        System.out.println(Skill.list[i] + "의 지속시간은 " + SkillLevel.getActivateTime(i, Stat.level[i]) / (double) 1000 + "초 입니다.");
+                        System.out.println(Skill.list[i] + "의 쿨타임은 " + SkillLevel.getCooldownTime(i, Stat.level[i]) / (double) 1000 + "초 입니다.");
                     }
                 }
             }
