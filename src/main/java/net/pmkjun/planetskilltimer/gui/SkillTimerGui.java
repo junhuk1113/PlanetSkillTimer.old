@@ -36,7 +36,7 @@ public class SkillTimerGui {
             new Identifier("planetskilltimer", "skill_mining.png"),
             new Identifier("planetskilltimer","skill_digging.png")
     };
-    private static final Identifier WIDGETS = new Identifier("textures/gui/widgets.png");
+    private static final Identifier WIDGETS = new Identifier("planetskilltimer","widgets.png");
 
     public SkillTimerGui(){
         this.mc = MinecraftClient.getInstance();
